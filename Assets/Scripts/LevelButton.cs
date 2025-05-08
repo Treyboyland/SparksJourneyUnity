@@ -1,33 +1,33 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TextMeshPro;
+using TMPro;
 
 public class LevelButton : MonoBehaviour
 {
     [SerializeField]
     Button button;
 
-[SerializeField]
-TMP_Text textBox;
+    [SerializeField]
+    TMP_Text textBox;
 
-public Scene SceneToLoad {get; set;}
+    public Scene SceneToLoad { get; set; }
 
-public int Index 
-{
-set
-{
-textBox.text = "" + value;
-}
-}
+    public int Index
+    {
+        set
+        {
+            textBox.text = "" + value;
+        }
+    }
 
-void Start()
-{
-button.onClick.AddListener(LoadScene);
-}
+    void Start()
+    {
+        button.onClick.AddListener(LoadScene);
+    }
 
-void LoadScene()
-{
-SceneManager.LoadScene(SceneToLoad);
-}
+    void LoadScene()
+    {
+        SceneManager.LoadScene(SceneToLoad.buildIndex);
+    }
 }

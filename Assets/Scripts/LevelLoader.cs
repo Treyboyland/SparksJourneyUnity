@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class LevelLoader : MonoBehaviour
@@ -8,28 +9,28 @@ public class LevelLoader : MonoBehaviour
     [SerializeField]
     List<Scene> gameLevels;
 
-[SerializeField]
-LevelButton buttonPrefab;
+    [SerializeField]
+    LevelButton buttonPrefab;
 
-[SerializeField]
-GridLayout buttonHolder;
+    [SerializeField]
+    GridLayout buttonHolder;
 
 
 
     void Start()
-{
-CreateButtons();
-}
+    {
+        CreateButtons();
+    }
 
-void CreateButtons()
-{
-for (int i = 0; i < gameLevels.Count ; i++)
-{
-var button = Instantiate(buttonPrefab) as LevelButton;
+    void CreateButtons()
+    {
+        for (int i = 0; i < gameLevels.Count; i++)
+        {
+            var button = Instantiate(buttonPrefab) as LevelButton;
 
-button.Index = i;
-button.SetParent(buttonHolder.transform);
-button.SceneToLoad = gameLevels[i];
-}
-}
+            button.Index = i;
+            button.transform.SetParent(buttonHolder.transform);
+            button.SceneToLoad = gameLevels[i];
+        }
+    }
 }
