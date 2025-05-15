@@ -13,7 +13,7 @@ public class LevelLoader : MonoBehaviour
     LevelButton buttonPrefab;
 
     [SerializeField]
-    GridLayout buttonHolder;
+    GridLayoutGroup buttonHolder;
 
 
 

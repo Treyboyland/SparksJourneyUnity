@@ -62,6 +62,14 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if (context.ReadValueAsButton())
+        {
+            onPause.Invoke();
+        }
+    }
+
 
     public void OnReset(InputAction.CallbackContext context)
     {
