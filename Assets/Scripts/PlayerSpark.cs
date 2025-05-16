@@ -14,6 +14,9 @@ public class PlayerSpark : MonoBehaviour
     [SerializeField]
     GameEventGeneric<Vector3> onActivated;
 
+[SerializeField]
+GameEventGeneric<Vector3> onDeactivated;
+
     Vector3 anchorPosition;
 
     public void Activate(Vector3 startPos)
@@ -24,6 +27,12 @@ public class PlayerSpark : MonoBehaviour
         gameObject.SetActive(true);
     }
 
+public void Deactivate()
+{
+onDeactivated.Invoke(transform.position);
+gameObject.SetActive(false);
+}
+
     void FixedUpdate()
     {
         if (Vector3.Distance(anchorPosition, transform.position) > maxMovementDistance)
@@ -33,4 +42,14 @@ public class PlayerSpark : MonoBehaviour
         }
     }
 
+
+public void OnTriggerEnter2D(Collider2D collider)
+{
+var bot = collider.gameObject.GetCOmponent<Robot>();
+if(bot)
+{
+bot.IsActiveBot = true;
+Deactivate();
+}
+}
 }
