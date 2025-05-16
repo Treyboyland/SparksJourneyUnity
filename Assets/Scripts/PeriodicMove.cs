@@ -3,20 +3,20 @@ using UnityEngine;
 public class PeriodicMove : MonoBehaviour
 {
     [SerializeField]
-    Vector2 movementVector;
+    Vector3 movementVector;
 
-[SerializeField]
-float revolutionsPerSeconds;
+    [SerializeField]
+    float revolutionsPerSeconds;
 
-Vector3 initialPosition;
+    Vector3 initialPosition;
 
-void Start ()
-{
-initialPosition = transform.position;
-}
+    void Start()
+    {
+        initialPosition = transform.position;
+    }
 
     void Update()
-{
-transform.position = initialPosition + 2 * Math.PI * Time.deltaTime * initialPosition;
-}
+    {
+        transform.position = initialPosition + Mathf.Cos(2 * Mathf.PI * Time.deltaTime) * movementVector;
+    }
 }

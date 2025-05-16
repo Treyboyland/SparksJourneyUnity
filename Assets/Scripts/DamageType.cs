@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DamageType", menuName = "Scriptable Objects/DamageType")]
+[CreateAssetMenu(fileName = "DamageType-", menuName = "Scriptable Objects/Damage Type")]
 public class DamageType : ScriptableObject
 {
     [SerializeField]

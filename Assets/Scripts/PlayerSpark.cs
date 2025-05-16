@@ -1,36 +1,36 @@
 using UnityEngine;
 
-public class PlayerSpark : MonoBehaviour 
+public class PlayerSpark : MonoBehaviour
 {
     [SerializeField]
     float maxMovementDistance;
 
-[SerializeField]
-float speed;
+    [SerializeField]
+    float speed;
 
-[SerializeField]
-RigidBody2D body;
+    [SerializeField]
+    Rigidbody2D body;
 
-[SerializeField]
-GameEventGeneric <Vector3> onActivated;
+    [SerializeField]
+    GameEventGeneric<Vector3> onActivated;
 
-Vector3 anchorPosition;
+    Vector3 anchorPosition;
 
-public void Activate(Vector3 startPos)
-{
-transform.position = startPos; 
-anchorPosition = startPos;
-onActivated.Invoke(startPos);
-gameObject.SetActive(true);
-}
+    public void Activate(Vector3 startPos)
+    {
+        transform.position = startPos;
+        anchorPosition = startPos;
+        onActivated.Invoke(startPos);
+        gameObject.SetActive(true);
+    }
 
-void FixedUpdate ()
-{
-if(Vector3.Distance(anchorPosition, transform.position) > maxMovementDistance)
-{
-Vector3 norm = (transform.position- anchorPosition).normalized ;
-body.MovePosition(anchorPosition+norm);
-}
-}
+    void FixedUpdate()
+    {
+        if (Vector3.Distance(anchorPosition, transform.position) > maxMovementDistance)
+        {
+            Vector3 norm = (transform.position - anchorPosition).normalized;
+            body.MovePosition(anchorPosition + norm);
+        }
+    }
 
 }

@@ -95,4 +95,9 @@ public class Robot : MonoBehaviour
         onDestroyed.Invoke(transform.position);
         gameObject.SetActive(false);
     }
+
+    public bool IsImmuneToDamage(DamageType damageType)
+    {
+        return stats.Invulnerablities.Contains(damageType);
+    }
 }

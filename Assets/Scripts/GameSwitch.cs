@@ -1,68 +1,72 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 
-public class GameSwitch : Monobehaviour
+public class GameSwitch : MonoBehaviour
 {
-[SerializeField]
-GameEventGeneric<bool> onSwitchActiveState;
+    [SerializeField]
+    GameEventGeneric<bool> onSwitchActiveState;
 
-[SerializeField]
-bool canBeTurnedOff;
+    [SerializeField]
+    bool canBeTurnedOff;
 
-[SerializeField]
-float secondsActive;
+    [SerializeField]
+    float secondsActive;
 
-[SerializeField]
-bool currentState;
+    [SerializeField]
+    bool currentState;
 
-float secondsElapsed;
+    float secondsElapsed;
 
-public bool CurrentState 
-{
-get => currentState;
-set
-{
-currentState =value;
-onSwitchActiveState.Invoke(currentState);
-}
-} 
+    public bool CurrentState
+    {
+        get => currentState;
+        set
+        {
+            currentState = value;
+            onSwitchActiveState.Invoke(currentState);
+            OnThisSwitchStateChanged.Invoke(currentState);
+        }
+    }
 
-void Start()
-{
-onSwitchActiveState.Invoke(currentState);
-}
+    public UnityEvent<bool> OnThisSwitchStateChanged;
 
-void Update()
-{
-if(currentState && secondsActive > 0)
-{
-secondsElapsed += Time.deltaTime;
-if(secondsElapsed >= secondsActive)
-{
-secondsElapsed = 0;
-CurrentState = false;
-}
-}
-}
+    void Start()
+    {
+        onSwitchActiveState.Invoke(currentState);
+    }
 
-void SwitchHit()
-{
-if(currentState && !canBeTurnedOff)
-{
-return;
-}
+    void Update()
+    {
+        if (currentState && secondsActive > 0)
+        {
+            secondsElapsed += Time.deltaTime;
+            if (secondsElapsed >= secondsActive)
+            {
+                secondsElapsed = 0;
+                CurrentState = false;
+            }
+        }
+    }
 
-CurrentState = !CurrentState;
-}
+    void SwitchHit()
+    {
+        if (currentState && !canBeTurnedOff)
+        {
+            return;
+        }
 
-void OnTriggerEnter2D(Collider2D collider)
-{
-var player = collider.gameObject.GetComponent<Robot>();
-if(player.IsActiveRobot)
-{
-SwitchHit();
-}
-}
+        CurrentState = !CurrentState;
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        var player = collider.gameObject.GetComponent<Robot>();
+        if (player.IsActiveBot)
+        {
+            SwitchHit();
+        }
+    }
 
 }

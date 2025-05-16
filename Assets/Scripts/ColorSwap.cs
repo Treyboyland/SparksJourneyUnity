@@ -2,19 +2,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class ColorSwap : Monobehaviour
+public class ColorSwap : MonoBehaviour
 {
-[SerializeField]
-Color trueColor;
+    [SerializeField]
+    Color trueColor;
 
-[SerializeField]
-Color falseColor;
+    [SerializeField]
+    Color falseColor;
 
-[SerializeField]
-SpriteRenderer sprite;
+    [SerializeField]
+    SpriteRenderer sprite;
 
-public void SetColor(bool val)
-{
-sprite.color = val ? trueColor : falseColor;
-} 
+    public void SetColor(bool val)
+    {
+        sprite.color = val ? trueColor : falseColor;
+    }
 }
