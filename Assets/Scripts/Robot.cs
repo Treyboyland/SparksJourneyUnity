@@ -20,6 +20,9 @@ public class Robot : MonoBehaviour
     [SerializeField]
     GameEventGeneric<Vector3> onDestroyed;
 
+    [SerializeField]
+    GameEventGeneric<Transform> onChangeCameraFocus;
+
 
 
     Vector2 movementVector;
@@ -34,6 +37,10 @@ public class Robot : MonoBehaviour
             if (!isActiveBot)
             {
                 movementVector = Vector2.zero;
+            }
+            else
+            {
+                onChangeCameraFocus.Invoke(transform);
             }
         }
     }
@@ -57,6 +64,7 @@ public class Robot : MonoBehaviour
             return;
         }
         movementVector = move;
+        movementVector.y = 0;
     }
 
     public void Jump()
@@ -75,7 +83,7 @@ public class Robot : MonoBehaviour
     {
         if (movementVector != Vector2.zero)
         {
-            body.AddForce(movementVector * stats.Speed * Time.fixedDeltaTime);
+            body.MovePosition((Vector2)transform.position + movementVector * stats.Speed * Time.fixedDeltaTime);
         }
     }
 

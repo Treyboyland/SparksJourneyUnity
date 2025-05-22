@@ -3,9 +3,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DataLog-", menuName = "Scriptable Objects/Data Log")]
 public class DataLog : ScriptableObject
 {
-  [TextArea]
-  [SerializeField]
-  string logText;
+    [TextArea]
+    [SerializeField]
+    string logText;
 
-  public string LogText { get => logText; }
+    public string LogText { get => logText; }
 }

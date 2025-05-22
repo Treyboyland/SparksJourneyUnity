@@ -29,10 +29,7 @@ public class PlayerControls : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (context.ReadValueAsButton())
-        {
-            onMove.Invoke(context.ReadValue<Vector2>());
-        }
+        onMove.Invoke(context.ReadValue<Vector2>());
     }
 
 

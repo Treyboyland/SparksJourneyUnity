@@ -3,43 +3,45 @@ using UnityEngine;
 
 public class LevelTracker : MonoBehaviour
 {
-[SerializeField]
-int currentLevel;
+    [SerializeField]
+    int currentLevel;
 
-[SerializeField]
-int maxUnlockedLevel;
+    [SerializeField]
+    int maxUnlockedLevel;
 
-public int CurrentLevel {get => currentLevel;}
+    public int CurrentLevel { get => currentLevel; }
 
-static LevelTracker _instance;
+    static LevelTracker _instance;
 
-void Awake()
-{
-if(_instance != null && this != _instance)
-{
-Destroy(gameObject);
-return;
-}
+    public static LevelTracker Instance => _instance;
 
-_instance = this;
-DontDestroyOnLoad(gameObject);
-}
+    void Awake()
+    {
+        if (_instance != null && this != _instance)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
-public void IncreaseLevel()
-{
-currentLevel ++;
-if(currentLevel > maxLevel)
-{
-maxUnlockedLevel = currentLevel;
-}
-}
+        _instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
 
-public void SetLevel(int level)
-{
-currentLevel = level;
-if(currentLevel > maxLevel)
-{
-maxUnlockedLevel = currentLevel;
-}
-}
+    public void IncreaseLevel()
+    {
+        currentLevel++;
+        if (currentLevel > maxUnlockedLevel)
+        {
+            maxUnlockedLevel = currentLevel;
+        }
+    }
+
+    public void SetLevel(int level)
+    {
+        currentLevel = level;
+        if (currentLevel > maxUnlockedLevel)
+        {
+            maxUnlockedLevel = currentLevel;
+        }
+    }
 }

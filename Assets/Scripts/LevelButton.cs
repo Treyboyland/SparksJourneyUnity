@@ -11,12 +11,19 @@ public class LevelButton : MonoBehaviour
     [SerializeField]
     TMP_Text textBox;
 
+    [SerializeField]
+    GameEventGeneric<Scene> onLoadScene;
+
     public Scene SceneToLoad { get; set; }
+
+    int index;
 
     public int Index
     {
+        get => index;
         set
         {
+            index = value;
             textBox.text = "" + value;
         }
     }
@@ -28,6 +35,7 @@ public class LevelButton : MonoBehaviour
 
     void LoadScene()
     {
-        SceneManager.LoadScene(SceneToLoad.buildIndex);
+        LevelTracker.Instance.SetLevel(index);
+        onLoadScene.Invoke(SceneToLoad);
     }
 }
